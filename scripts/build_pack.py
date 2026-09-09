@@ -226,6 +226,6 @@ if __name__ == '__main__':
     parser.add_argument('pack', type=Path)
     args = parser.parse_args()
     try:
-        print('\n'.join(build(args.pack)))
+        print(json.dumps({'created': build(args.pack)}, ensure_ascii=True))
     except (ValueError, KeyError, TypeError, OSError, ET.ParseError) as exc:
         parser.exit(1, 'Build failed: ' + str(exc) + '\n')

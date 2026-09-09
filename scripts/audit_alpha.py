@@ -50,4 +50,4 @@ if __name__ == '__main__':
     parser.add_argument('assets',type=Path)
     parser.add_argument('output',type=Path)
     args=parser.parse_args()
-    print(json.dumps(audit(args.assets,args.output),ensure_ascii=False,indent=2))
+    print(json.dumps(audit(args.assets,args.output),ensure_ascii=True,indent=2))

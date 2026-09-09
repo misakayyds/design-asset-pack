@@ -1,6 +1,9 @@
 import copy
 import importlib.util
 import json
+import os
+import subprocess
+import sys
 from pathlib import Path
 import uuid
 import unittest
@@ -71,6 +74,12 @@ class PackTests(unittest.TestCase):
     def test_rejects_duplicate_ids(self):
         self.data['items'].append(copy.deepcopy(self.data['items'][0]))
         with self.assertRaises(ValueError):self.run_pack()
+
+    def test_cli_works_with_western_console_encoding(self):
+        (self.root/'layout.json').write_text(json.dumps(self.data),encoding='utf-8')
+        result=subprocess.run([sys.executable,str(ROOT/'scripts/build_pack.py'),str(self.root)],env={**os.environ,'PYTHONIOENCODING':'cp1252'},capture_output=True)
+        self.assertEqual(result.returncode,0,result.stderr)
+        self.assertIn('使用说明.txt',json.loads(result.stdout.decode('ascii'))['created'])
 
 
 if __name__=='__main__':unittest.main()
