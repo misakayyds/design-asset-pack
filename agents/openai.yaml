@@ -1,0 +1,4 @@
+interface:
+  display_name: "跨软件设计素材包"
+  short_description: "按参考图或要求制作独立素材、精确布局及 PS／Illustrator 导入包"
+  default_prompt: "用 $design-asset-pack 根据我的参考图或要求制作可在 Photoshop 和 Illustrator 中修改的完整素材包，并补问必要的设计信息。"
